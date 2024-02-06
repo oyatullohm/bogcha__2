@@ -180,8 +180,8 @@ class CostEducatorView(View):
 
 
 
-# def handler_404(request,exception):
-#    return render(request, "404.html")
+def handler_404(request,exception):
+   return render(request, "404.html")
 
-# def handler_500(request):
-#     return render(request, "500.html")b
+def handler_500(request):
+    return render(request, "500.html")
