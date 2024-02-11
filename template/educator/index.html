@@ -57,9 +57,9 @@
           <th scope="row"> {{forloop.counter}}</th>
           <td><a href="{% url 'main:customer_educator' c.id %}" class="text-success">{{c.name}}</a></td>
           {% if c.day_summa == True %}
-           <td><a class="text-primary-emphasis" href="{% url 'main:customer_educator' c.id %}">Малуmот >></a></td> 
+           <td><a class="text-info" href="{% url 'main:customer_educator' c.id %}">Малуmот</a></td> 
           {% else %}
-          <td  class="text-primary-emphasis" >{{c.total_summa}} {% payment_True_or_False c.total_summa c.months_customers.all %} {% payment_summa c.months_customers.all %} </td>
+          <td  class=" text-black" >{{c.total_summa}} {% payment_True_or_False c.total_summa c.months_customers.all %} {% payment_summa c.months_customers.all %} </td>
           {% endif %}
           <td class="text-warning-emphasis">
             <div class="form-check form-switch">

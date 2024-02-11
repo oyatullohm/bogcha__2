@@ -54,7 +54,7 @@ def came_and_went_true_false(request):
             if client.chief == True:
                 educator = Client.objects.filter(token_code = client.token_id)
                 customer =  Customer.objects.filter(chief=client)
-                client.data = online_date 
+                client.data = online_date
                 client.save()
                 for i in educator:
                     i.data = online_date

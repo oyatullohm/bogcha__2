@@ -122,9 +122,6 @@
               <div class="alert alert-info" role="alert">
                 <span class="text-danger-emphasis">Взнос </span> : {{ customer.total_summa }} Сум
               </div>
-                <div class="alert alert-danger" role="alert">
-                  <span class="text-danger-emphasis">Ой </span>  :{{month.0.month|date:"  M : Y "}}
-                  </div>
                   {% load my_tag %}
                   <div class="alert alert-warning" role="alert">
                       <span class="text-danger-emphasis">Келган Кунлари  {% if customer.day_summa == True %}  Ва Тулов   : {% endif %} {% came_and_went month.0.came_and_went %} : 
