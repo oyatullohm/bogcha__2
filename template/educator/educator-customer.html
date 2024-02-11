@@ -96,7 +96,7 @@
                           <label class="form-label" for="form6Example6">Oй</label>
                           <select class="form-select" aria-label="Default select example" name="month">
                               {% for i in month %}
-                            <option  value="{{i.id}}">  {{i}}  </option>
+                            <option  value="{{i.id}}"> {{i.month|date:"M Y"}}   </option>
                               {% endfor %}
                           </select>
                         </div>
