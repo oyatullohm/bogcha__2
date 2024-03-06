@@ -1,0 +1,30 @@
+{% extends 'wrapper_admin.html' %}
+
+{% block content %}
+<div class="container text-center"><div class="row"><div class="col"></div>
+   <table class="table" id="myTable">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col" class="text-primary-emphasis">Гуруппа</th>
+            <th scope="col" class="text-success" > Сумма</th>
+            <th scope="col" class="text-warning-emphasis">Болалар Сони </th>
+          </tr>
+        </thead>
+        <tbody>
+
+            {% for e in educator %}
+          <tr>
+            <th scope="row"> {{forloop.counter}}</th>
+            <td><a  class="text-primary-emphasis" href="{% url 'main:educators_admin' e.id %}" >{{e}}</a></td>
+            <td class="text-success" >{{e.balans_summa}} </td>
+            <td class="text-warning-emphasis">   {{ e.educators.all.count }}  </td>
+          </tr>
+          {% endfor %}
+
+
+        </tbody>
+      </table>
+    </div></div>
+
+{% endblock content %}

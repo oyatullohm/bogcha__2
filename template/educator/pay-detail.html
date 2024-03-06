@@ -1,0 +1,31 @@
+{% extends 'wrapper.html' %}
+{% block content %}
+
+    <div class="container text-center"><div class="row"><div class="col"></div>
+   <table class="table">
+        <thead>
+          <tr>
+                <th scope="col">Исим</th>
+                <th scope="col">Ту'лов санаси</th>
+                <th scope="col"> Ким Олди </th>
+                <th scope="col">Сумма</th>
+
+          </tr>
+        </thead>
+        <tbody>
+            {% for c in  payment %}
+          <tr>
+            <td> {{c.customer}}</td>
+            <td > {{c.date |date:' m d '}}  </td>
+            <td > {{c.user}} </td>
+            <td > {{c.summa }} </td>
+          </tr>
+          {% endfor %}
+
+        </tbody>
+      </table>
+
+    </div></div></body>
+
+
+    {% endblock %}

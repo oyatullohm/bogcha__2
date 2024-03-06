@@ -1,0 +1,32 @@
+{% extends 'wrapper.html' %}
+{% block content %}
+
+<div class="container text-center"><div class="row"><div class="col"></div>
+
+<table class="table">
+     <thead>
+       <tr>
+         <th scope="col">#</th>
+         <th scope="col">Сумма</th>
+         <th scope="col">Сана </th>
+             <th scope="col">Изох</th>
+       </tr>
+     </thead>
+
+     <tbody>
+       <tr>
+         {% for i in cost %}
+         <th class ="alert alert-secondary   text-warning-emphasis"role="alert">  {{forloop.counter}}</th>
+         <th class=" text-info" > {{i}}</th>
+         <th class=" text-success" > {{i.date|date:"M d"}}</th>
+         <th  class="text-warning "> {{i.text}}</th>
+      </tr>
+      {% endfor %}
+
+    </tbody>
+  </table>
+ 
+ </div></div></body>
+
+
+{% endblock content %}

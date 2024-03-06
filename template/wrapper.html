@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bog'cha</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+</head>
+<body>
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+
+        {% if message.tags == 'success' %}
+
+        <div class="alert alert-success alert-dismissible fade show msg" role="alert">
+          <span class="alert-icon"><i class="fa-duotone fa-check text-white"></i></span>
+          <span class="alert-text text-white">{{ message }}</span>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        {% elif message.tags == 'error' %}
+        <div class="alert alert-danger alert-dismissible fade show msg" role="alert">
+          <span class="alert-icon"><i class="fa-sharp fa-solid fa-xmark text-white me-2"></i></span>
+          <span class="alert-text text-white">{{ message }}</span>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+          </button>
+      </div>
+
+        {% else %}
+        {% endif %}
+        {% endfor %}
+    </ul>
+    {% else %}
+    {% endif %}
+    <div  class="modal fade" id="exampleModal_transfer" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form method="post" action="{% url 'main:transfer_educator' %}" role="form" id="contact-form" autocomplete="off" >
+              {% csrf_token %}
+              <div class="mb-3">
+                <label for="recipient-name" class="col-form-label" >Утказиш</label>
+                <select name="transfer" class="form-control" id="">
+                  <option value="transfer">Утказиш</option>
+                  <option value="un_transfer">Кабул Килиш</option>
+                </select>
+              </div>
+              <div class="mb-3">
+                <label for="recipient-name" class="col-form-label" >Сумма</label>
+                <input type="number" class="form-control" id="recipient-name" required name="summa">
+              </div>
+
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-primary"> Пул Утказма  </button>
+                </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="exampleModal_chqim" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form method="post" action="{% url 'main:cost_educator' %}" role="form" id="contact-form" autocomplete="off" >
+                {% csrf_token %}
+                <div class="mb-3">
+                  <label for="recipient-name" class="col-form-label" >Сумма</label>
+                  <input type="number" class="form-control" id="recipient-name"required name="pul">
+                </div>
+                <div class="mb-3">
+                  <label for="recipient-name" class="col-form-label" >Изох</label>
+                  <input type="text" class="form-control" id="recipient-name" required name="text">
+                </div>
+                    <button type="submit" class="btn btn-primary"> Чк,им К,у'шиш </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form method="post" action="{% url 'main:create_customer' %}" role="form" id="contact-form" autocomplete="off" >
+                {% csrf_token %}
+
+                <div class="mb-3">
+                  <label for="recipient-name" class="col-form-label" >Исим</label>
+                  <input type="text" class="form-control" id="recipient-name" required name="name">
+                </div>
+                <div class="mb-3">
+                  <label for="recipient-name" class="col-form-label" >Тел</label>
+                  <input type="text" class="form-control" id="recipient-name"required name="phone">
+                </div>
+                <div class="mb-3">
+                  <label for="recipient-name" class="col-form-label" >Взнос</label>
+                  <input type="number" class="form-control" id="recipient-name" required name="total_summa">
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary"> Бола К,у’шиш  </button>
+                  </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+          <a class="navbar-brand  text-primary " href="/">  {{request.user}}</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link active text-dark " aria-current="page" href="{% url 'main:payment_educator' %}">Взнослар</a>
+              </li>
+              <li class="nav-item">
+                <a href="#"  class="text-success nav-link "  data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="name" >Бола К,у’шиш </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-warning" href="{% url 'main:cost_educator' %}">Чк,им лар</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-info" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal_chqim" data-bs-whatever="name">Чк,им К,у’шиш</a>
+              </li>
+              <li class="nav-item ">
+                <a class=" nav-link text-danger-emphasis" href="#"  data-bs-toggle="modal" data-bs-target="#exampleModal_transfer" data-bs-whatever="name">Пул Утказма</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-info-emphasis" href="{% url 'main:transfer_educator' %}" >Барча Утказма</a>
+              </li>
+              <li class="nav-item">
+                <a href="/accounts/logout/"  ><h6 class="text-danger nav-link">Чк,иш</h6 ></a> 
+              </li>
+
+            </ul>
+          </div>
+        </div>
+      </nav>
+{% block content %}
+{% endblock %}
+</body>
+</html>

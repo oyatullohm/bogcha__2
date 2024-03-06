@@ -1,0 +1,36 @@
+{% extends 'wrapper.html' %}
+
+
+{% block content %}
+
+
+{% load my_tag %}
+<div class="container">
+    <div class="row">
+        <div class="col-6">
+            {% for i in month %}
+            <div class="alert alert-primary" role="alert">
+                {{i.month|date:"M Y "}} : Взнослар :
+                 {%  total_payment_summa  request i %}  : Сум
+              </div>
+
+            {% endfor %}
+        </div>
+        <div class="col-6">
+
+
+              {% for i in month %}
+              <div class="alert alert-warning" role="alert">
+                {{i.month|date:"M Y "}} :  Чк,им лар
+               : {%  total_cost_summa  request i %} : Сум
+               </div>
+
+
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}

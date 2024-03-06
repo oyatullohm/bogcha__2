@@ -1,0 +1,162 @@
+{% extends 'wrapper.html' %}
+{% block content %}
+
+<div class="container">
+  <div class="row">
+      <div class="col">
+          <div class="modal fade" id="exampleModal___customer_delete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <form method="post" action="{% url 'main:delete_customer_educator' customer.id %}">
+                      {% csrf_token %}
+                        <!-- Text input -->
+
+                        <div class="form-check d-flex justify-content-center mb-4">
+                          <button data-mdb-ripple-init type="submit" class="btn btn-danger mb-8">У'чриш  </button>
+                        </div>
+                        <!-- Submit button -->
+                      </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <div class="modal fade" id="exampleModal___customer_update" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <form method="post" action="{% url 'main:customer_educator_update' customer.id %}">
+                      {% csrf_token %}
+                        <!-- Text input -->
+                        <div data-mdb-input-init class="form-outline mb-4">
+                          <label class="form-label" for="form6Example3"> Исим</label>
+                          <input type="text" id="form6Example3" class="form-control" name="name"  value="{{customer.name}}"/>
+                        </div>
+                        <div data-mdb-input-init class="form-outline mb-4">
+                          <label class="form-label" for="form6Example6">Тарбиячи</label>
+                        <select class="form-control" name="educator" id="">
+                          <option  value="{{customer.educator.id}}"> {{ customer.educator }}</option>
+                          {% for i in educator %}
+                          {% if customer.educator.id == i.id  %}
+                          {% else %}
+                          <option  value="{{i.id}}"> {{ i }}</option>
+                          {% endif %}
+                          {% endfor %}
+                        </select>
+                        </div>
+                        <!-- Number input -->
+                        <div data-mdb-input-init class="form-outline mb-4">
+                          <label class="form-label" for="form6Example6">Взнос</label>
+                          <input type="text" id="form6Example6" class="form-control" name="vznos" value="{{customer.total_summa}}" />
+                        </div>
+                        <div data-mdb-input-init class="form-outline mb-4">
+                          <label class="form-label" for="form6Example6">Тел</label>
+                          <input type="text" id="form6Example6" class="form-control" name="phone" value="{{customer.phone}}" />
+                        </div>
+                        <div class="form-check form-switch">
+                          <label class="form-check-label" for="form6Example8">  Активе  </label>
+
+                          <input  name="active"   {% if customer.active == True %} checked  {% endif %} class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" >
+                        </div>
+                        <div class="form-check form-switch ">
+                          <label class="form-check-label" for="form6Example8">  Кунлик Хисоб  </label>
+
+                          <input  name="day_summa"   {% if customer.day_summa == True %} checked  {% endif %} class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" >
+                        </div>
+                        <div class="form-check d-flex justify-content-center mb-4">
+                          <button data-mdb-ripple-init type="submit" class="btn btn-primary btn-block mb-8">Оk</button>
+                        </div>
+                        <!-- Submit button -->
+                      </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <div class="modal fade" id="exampleModal___customer" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <form method="post" action="">
+                      {% csrf_token %}
+                        <!-- Text input -->
+                        <div data-mdb-input-init class="form-outline mb-4">
+                          <label class="form-label" for="form6Example6">Cyмма</label>
+                          <input type="number" id="form6Example6" class="form-control" name="summa"  />
+                        </div>
+                        <div data-mdb-input-init class="form-outline mb-4">
+                          <label class="form-label" for="form6Example6">Oй</label>
+                          <select class="form-select" aria-label="Default select example" name="month">
+                              {% for i in month %}
+                            <option  value="{{i.id}}">  {{i}}  </option>
+                              {% endfor %}
+                          </select>
+                        </div>
+                        <div class="form-check d-flex justify-content-center mb-4">
+                          <button data-mdb-ripple-init type="submit" class="btn btn-primary btn-block mb-8"> Тулов </button>
+
+                        </div>
+                        <!-- Submit button -->
+                      </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+              <div class="alert alert-primary" role="alert">
+                  <span class="text-danger-emphasis">Тарбиячи  </span> : {{customer.educator}}
+              </div>
+              <div class="alert alert-secondary" role="alert">
+                  <span class="text-danger-emphasis"> Исим  </span>  : {{customer.name}}
+              </div>
+              <div class="alert alert-success" role="alert">
+                  <span class="text-danger-emphasis">Тел  </span> :{{customer.phone}}
+              </div>
+              <div class="alert alert-info" role="alert">
+                <span class="text-danger-emphasis">Взнос </span> : {{ customer.total_summa }} Сум
+              </div>
+                <div class="alert alert-danger" role="alert">
+                  <span class="text-danger-emphasis">Ой </span>  :{{month.0.month|date:"  M : Y "}}
+                  </div>
+                  {% load my_tag %}
+                  <div class="alert alert-warning" role="alert">
+                      <span class="text-danger-emphasis">Келган Кунлари  {% if customer.day_summa == True %}  Ва Тулов   : {% endif %} {% came_and_went month.0.came_and_went %} : 
+                         {% if customer.day_summa == True %}  {%  customer_days  month.0.came_and_went  customer.total_summa  customer.chief.working_day  %}
+                         {% else %}
+                        {% endif %}
+                        </span>
+                </div>
+                <div class="alert alert-info" role="alert">
+                  <span class="text-danger-emphasis">Активе  </span> : {% if customer.active %}  ✅ {% else %} ❌ {% endif %}
+                </div>
+                <a  data-bs-toggle="modal" data-bs-target="#exampleModal___customer" data-bs-whatever="name" type="button" class="btn btn-info"> Взнос</a>
+                <a  data-bs-toggle="modal" data-bs-target="#exampleModal___customer_update" data-bs-whatever="name" type="button" class="btn btn-success"> Тахрирлаш </a>
+                <a  data-bs-toggle="modal" data-bs-target="#exampleModal___customer_delete" data-bs-whatever="name" type="button" class="btn btn-danger "> У'чриш  </a>
+                <br>
+                <br>
+
+                {% for i in month %}
+                <a href="{% url 'main:customer_month_detail_educator' i.id %}">
+                <div class="{% color forloop.counter %}" role="alert">
+                  <span class="text-danger-emphasis">  {% if customer.day_summa == True %}   {{ i.month|date:"M : Y "  }}   : {% came_and_went i.came_and_went %} :    Келган  :
+                    {%  customer_days  i.came_and_went  customer.total_summa  customer.chief.working_day  %} Взноси :  {{i.summa}} Туланган  ,
+                    {% else %}
+                      Взнос {{i.total_summa}} : {{ i.month|date:"M : Y "  }} : Тулаиган сумма   {{i.summa}}
+                   {% endif %}
+                   </span>
+                  </div>
+                </a>
+              {% endfor %}
+          </div>
+
+  </div>
+</div>
+
+{% endblock content %}

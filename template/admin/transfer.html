@@ -1,0 +1,37 @@
+{% extends 'wrapper_admin.html' %}
+{% block content %}
+<style>
+    .none__{
+      display:none !important;
+    }
+  </style>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <table class="table" id="myTable">
+                <thead>
+                  <tr>
+                    <!-- <th scope="col">#</th> -->
+                    <th scope="col" class="text-primary">sana</th>
+                    <th scope="col" class="text-success"> Boshliq</th>
+                    <th scope="col " class="text-danger-emphasis"> Nshchi</th>
+                    <th scope="col" class="text-info-emphasis">  Summa</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    {% for i in  transfer %}
+                  <tr>
+                    <!-- <th scope="row">{{forloop.counter}} </th> -->
+                    <td class="text-primary" >{{i.date|date:"M d"}} </td>
+                    <td class="text-success" >{{i.chief}} : {{i.text}} </td>
+                    <td  class="text-danger-emphasis"> {{i.text}} : {{i.educator }}</td>
+                    <td  class="text-info-emphasis">{{i.summa}}</td>
+
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+        </div>
+    </div>
+</div>
+{% endblock content %}

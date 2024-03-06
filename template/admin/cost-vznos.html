@@ -1,0 +1,23 @@
+{% extends 'wrapper_admin.html' %}
+{% block content %}
+<style>
+    .none__{
+        display: none !important;
+    }
+</style>
+{% load my_tag %}
+<div class="container">
+    <div class="row">
+        <div class="col">
+            {% for i in month %}
+                <div class="alert alert-secondary" role="alert">
+                    {{i.month|date:"M Y"}}  : Крим  : {{i.total_summa}}: Сум
+                </div>
+                <div class="alert alert-success" role="alert">
+                    {{i.month|date:"M Y"}}  :  Чиким  : {%  month_cost i.cost_months.all %} : Сум
+                </div>
+              {% endfor  %}
+            </div>
+    </div>
+</div>
+{% endblock content %}
